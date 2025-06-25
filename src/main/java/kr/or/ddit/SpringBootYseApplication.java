@@ -9,7 +9,5 @@ public class SpringBootYseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootYseApplication.class, args);
 	}
-	
-	public void amugeona() {}
 
 }
