@@ -1,0 +1,102 @@
+# SPRING1 수업(하루만에 끝내는 Spring MVC)
+# 2025.06.26
+# SPRING1 수업에서는 STS IDE와 Mybatis를 활용합니다.
+
+1. 수업 환경설정
+
+	-JDK : Java 21
+	-IDE Tool : Spring Tool Suite 4.31.0
+	-Spring Boot Framework : 3.4.7
+	-Apache-Tomcat : 10.1
+		
+2. 수업 진행
+
+	# SPRING1 수업을 위한 기본 환경 설정
+	1) JDK 버전 확인
+		- cmd 명령프롬프트를 통해 JDK21인지 확인
+	2) STS 4.31.0 설치
+		- https://spring.io/tools
+		- 홈페이지에서 제공하는 IDE Tool 버전은 최신버전으로 설정되어 있습니다.
+		- 기본적으로는 최신버전을 다운로드 받아서 사용하는 건 문제없습니다. 하지만, 관련 플러그인이나 사용 OS에 따라서 차이는 있을 수 있습니다.
+		  그렇기 때문에 혹시나 문제가 발생한다거나 이상이 있다면 '4.26.0' 버전을 활용해보세요.
+		  (지금까지 수업하면서 테스트 해봤을 때 또는 학생등리 개인적으로 사요해봤을 때 에러에 대한 이슈가 가장 적음)
+	 	- 다운로드 링크(http://github.com.spring-projects/sts4/wiki/Previous-Versions)
+ 	3) Apache-Tomcat 10.1 설치
+ 		- http://tomcat.apache.org/download-10.cgi
+ 		- 10.1 버전의 Core 항목의 .zip 파일 다운로드
+ 		
+	# Workspace 경로 설정
+	1) 수업 프로젝트 관리 할 workspace_spring1 폴더 설정
+		- [작성 기준] D:\A_TeachingMaterial\100.JSP_SPRING\02.SPRING1(STS)\workspace_spring1
+		
+	# Spring Tool Suite4 설정
+	1) Encoding 설정
+		- Windows > Preferences > enc 검색
+			> left 항목의 모든 메뉴들을 'UTF-8'로 설정
+	2) Web Browser 설정
+		- Windows > Preferences > General > Web Browser
+			> Chrome 브라우저 설정 ( 본인이 가장 많이 사용하는 브라우저 설정)
+	3) Java 설정
+		- Windows > Preferences > Java > Installed JREs
+			> Add 버튼 클릭 후, Standard VM 선택
+			> JDK21 버전이 들어있는 경로 및 JRE Name 설정
+	4) Server 설정
+		- Windows > Preferences > Server > Runtime Environments
+			> Add 버튼 클릭 후, Apache 10.1 버전 선택 후 경로 설정
+	5) Font 설정
+		- Windows > Preferences > General > Appearence > Colors and Fonts
+			> 원하는 폰트 설정 (기본 Consolar 설정, 유의 ::: 띄어쓰기가 구분될 수 있는 폰트로 사용하길)
+			
+	# Spring 프로젝트 생성
+	1) Spring Starter Project 생성
+		- File > New > Spring Starter Project 선택
+		
+		1-1) Spring 생성 시 기본 설정
+			> Service URL : https://start.spring.io
+			> Name : SpringBootYse
+			> Type : Maven
+			> Packaging : Jar
+			> Java Version : 21
+			> Group : kr.or
+			> Artifact : ddit
+			> Package : kr.or.ddit
+		1-2) Spring Dependency 설정
+			> Spring Web : Spring MVC를 사용하여 Restful을 포함한 웹 애플리케이션을 구축
+			> Spring Boot DevTools : 빠른 애플리케이션 재시작, LiveReload
+			> Spring Boot Actuator : 애플리케이션 상태, 지표, 세션 등과 같은 내용을 모니터링하고 관리할 수 있는 내장 엔드포인트를 지원
+			> JDBC API : 데이터베이스 연결 API
+			> Oracle Driver : Oracle에 대한 엑세스를 제공하는 JDBC 드라이버
+			> Mybatis Framework : 사용자 정의 SQL 저장 프로시저 및 고급 매핑을 지원하는 지속성 프레임워크
+									Mybatis xml 설명자 또는 주석을 사용하여 객체를 저장 프로시저 또는 sql문과 연결
+			> Lombok : 상용구 코드를 줄이는데 도움이 되는 Java 주석 라이브러리
+	2) 생성한 프로젝트 설정
+		- welcome 페이지 설정
+			> src/main/resources/static 폴더 내, index.html 생성
+			> pom.xml 파일 내, spring-boot-starter-jdbc / mybatis-spring-boot-start 주석
+				: 주석하지 않고 서버를 실행 시, mybatis 관련 설정이 없기 때문에 에러가 발생
+			> http://localhost:8080 요청
+			> jsp 및 html을 활용하기 위해서는 enterprise web development 플러그인 설치가 선행되어야 한다.
+				: 그렇지 않다면, 직접 html 파일을 만들어서 welcome 페이지를 확인 할 수도 있다.
+		- JSP 설정을 위한 라이브러리 추가
+			> jakarta.servlet.jsp.jstl-api
+			> jakarta.servlet-api
+			> jakarta.servlet.jsp.jstl
+			> tomcat.embed-jasper
+			** 추가 시, pom.xml의 스키마로 설정된 해당 target namespace 중, maven 관련 에러가 표시된다면, 스키마가 정상적으로 다운로드 되지 않아서
+				발생하고 있는 에러이므로 스키마 에러 난 부분에 마우스를 올려 나타나는 가이드로 설치를 진행한다.
+		- application.properties 통합 설정
+			> 포트 설정
+				: server.port=8050
+			> Log 레벨 설정
+				: logging.level.kr.or.ddit=debug
+			> jsp 사용을 위한 view resolver 설정
+				: spring.mvc.view.prefix=/WEB-INF/views
+				: spring.mvc.view.suffix=.jsp
+			> Eclipse Enterprise Java and Web Developer Tools 플러그인 설치
+				> Help > Eclipse Marketplace > jsp 검색 > Eclipse Enterprise Java and Web Developer 설치
+				> 해당 플러그인은 welcome 페이지 확인 시, 다운로드 진행 또는 이후에 진행해도 무방
+		- HomeController 생성 후 메인 '/' 페이지 갱신
+			> src/main/java 내, kr.or.ddit.controller 패키지 안에 HomeController 생성
+			> http://localhost:8050 요청
+				: welcome 페이지의 형태가 커스텀 페이지로 변경된 걸 확인할 수 있다.
+	
