@@ -23,7 +23,7 @@
 							<label for="title" class="col-form-label">제목</label>
 						</div>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="" id="title"/>
+							<input type="text" class="form-control" name="title" id="title"/>
 						</div>	
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 							<label for="category" class="col-form-label">카테고리</label>
 						</div>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="" id="category"/>
+							<input type="text" class="form-control" name="category" id="category"/>
 						</div>	
 					</div>
 				</div>
@@ -43,12 +43,12 @@
 							<label for="price" class="col-form-label">가격</label>
 						</div>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="" id="price"/>
+							<input type="text" class="form-control" name="price" id="price"/>
 						</div>	
 					</div>
 				</div>
 				<button type="submit" class="btn btn-warning">등록</button>
-				<a href="" class="btn btn-primary">목록</a>
+				<a href="/book/list.do" class="btn btn-primary">목록</a>
 			</div>
 		</form>
 	</div>
